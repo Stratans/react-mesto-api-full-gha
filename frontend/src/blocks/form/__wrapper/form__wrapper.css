@@ -1,0 +1,14 @@
+.form__wrapper {
+	box-sizing: border-box;
+	margin: 60px auto 80px;
+	max-width: 358px;
+	width: 100%;
+	background-color: transparent;
+}
+
+@media screen and (max-width: 618px) {
+	.form__wrapper {
+		padding: 25px 22px;
+		max-width: 282px;
+	}
+}

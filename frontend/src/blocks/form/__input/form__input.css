@@ -1,0 +1,31 @@
+.form__input {
+	color: #ccc;
+	background-color: unset;
+	max-width: 358px;
+	width: 100%;
+	min-height: 27px;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 17px;
+	border: none;
+	border-bottom: 1px solid #ccc;
+	padding: 0 0 10px 0;
+	outline: none;
+	box-sizing: border-box;
+}
+
+.form__input:nth-child(n+1) {
+	margin-top: 22px;
+}
+
+.form__input:first-of-type {
+	margin-top: 0;
+}
+
+@media screen and (max-width: 767px) {
+	.form__input {
+		font-size: 14px;
+		line-height: 17px;
+		max-width: 238px;
+	}
+}

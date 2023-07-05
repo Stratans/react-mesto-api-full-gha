@@ -1,0 +1,10 @@
+.element__info {
+	background-color: #fff;
+	box-sizing: border-box;
+	width: 282px;
+	display: flex;
+	align-items: center;
+    justify-content: space-between;
+	padding: 0 19px 0 21px;
+	margin: 0 auto;
+}

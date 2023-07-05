@@ -1,0 +1,5 @@
+.popup__container-show {
+	max-width: 75vw;
+	height: 75vh;
+	position: relative;
+}

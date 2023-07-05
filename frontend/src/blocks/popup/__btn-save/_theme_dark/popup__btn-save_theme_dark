@@ -1,0 +1,6 @@
+.popup__btn-save_theme_dark {
+	background: white;
+	color: black;
+	margin-top: 216px;
+	margin-bottom: 0;
+}
