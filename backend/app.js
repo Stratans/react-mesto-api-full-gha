@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
+const cors = require('cors');
 const router = require('./routes/index');
 const { SERVER_ERROR } = require('./utils/constants');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -12,6 +13,7 @@ mongoose
   .then(() => console.log('Соединение с базой данных установлено'))
   .catch(() => console.log('Ошибка соединения с базой данных'));
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(requestLogger); // подключаем логгер запросов
