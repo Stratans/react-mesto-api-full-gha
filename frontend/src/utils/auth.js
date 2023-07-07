@@ -1,4 +1,4 @@
-const baseUrl = 'http://api.streitan.nomoreparties.sbs'
+const baseUrl = 'https://api.streitan.nomoreparties.sbs'
 
 function checkResponse(res) {
 	if (!res.ok) {
