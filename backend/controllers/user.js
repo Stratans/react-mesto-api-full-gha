@@ -6,6 +6,8 @@ const CastError = require('../errors/castError');
 const ValidationError = require('../errors/validationError');
 const ConflictError = require('../errors/conflictError');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 const {
   CREATED,
   STATUS_ОК,
@@ -103,7 +105,7 @@ module.exports.login = ((req, res, next) => {
   return user.findUserByCredentials(email, password)
     .then((userData) => {
       if (userData) {
-        const token = jwt.sign({ _id: userData._id }, 'secret-key', { expiresIn: '7d' });
+        const token = jwt.sign({ _id: userData._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
         res.send({ token });
       }
     })
