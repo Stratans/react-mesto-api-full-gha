@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3000'
+const baseUrl = 'http://api.streitan.nomoreparties.sbs'
 
 function checkResponse(res) {
 	if (!res.ok) {
