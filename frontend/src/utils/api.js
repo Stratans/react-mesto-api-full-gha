@@ -1,14 +1,8 @@
-import { token, address } from './constants'
-
+import { address } from './constants'
 
 class Api {
-	constructor({ token, address }) {
-		this._token = token;
+	constructor({ address }) {
 		this._address = address;
-		this._headers = {
-			authorization: this._token,
-			'Content-Type': 'application/json'
-		};
 	};
 
 	// обрабатываем ошибки с сервера
@@ -21,49 +15,73 @@ class Api {
 
 	// получаем карточки 
 	getInitialCards() {
+		const token = localStorage.getItem('token')
 		return fetch(`${this._address}/cards`, {
-			headers: this._headers,
+			headers: {
+				authorization: `Bearer ${token}`,
+				"Content-Type": "application/json",
+			},
 		}).then((res) => this._checkResponse(res))
 	};
 
 	// информация о пользователе с сервера
 	getUserInfo() {
+		const token = localStorage.getItem('token')
 		return fetch(`${this._address}/users/me`, {
-			headers: this._headers,
+			headers: {
+				authorization: `Bearer ${token}`,
+				"Content-Type": "application/json",
+			},
 		}).then((res) => this._checkResponse(res))
 	};
 
 	// обновление данных профиля
 	updateProfile({ name, about }) {
+		const token = localStorage.getItem('token')
 		return fetch(`${this._address}/users/me`, {
 			method: 'PATCH',
-			headers: this._headers,
+			headers: {
+				authorization: `Bearer ${token}`,
+				"Content-Type": "application/json",
+			},
 			body: JSON.stringify({ name, about })
 		}).then((res) => this._checkResponse(res))
 	};
 
 	// обновление аватара
 	updateAvatar(avatar) {
+		const token = localStorage.getItem('token')
 		return fetch(`${this._address}/users/me/avatar`, {
 			method: 'PATCH',
-			headers: this._headers,
+			headers: {
+				authorization: `Bearer ${token}`,
+				"Content-Type": "application/json",
+			},
 			body: JSON.stringify({ avatar })
 		}).then((res) => this._checkResponse(res))
 	};
 
 	// добавление лайка
 	_addLike(id) {
+		const token = localStorage.getItem('token')
 		return fetch(`${this._address}/cards/${id}/likes`, {
 			method: 'PUT',
-			headers: this._headers,
+			headers: {
+				authorization: `Bearer ${token}`,
+				"Content-Type": "application/json",
+			},
 		}).then((res) => this._checkResponse(res))
 	};
 
 	// удаление лайка
 	_removeLike(id) {
+		const token = localStorage.getItem('token')
 		return fetch(`${this._address}/cards/${id}/likes`, {
 			method: 'DELETE',
-			headers: this._headers,
+			headers: {
+				authorization: `Bearer ${token}`,
+				"Content-Type": "application/json",
+			},
 		}).then((res) => this._checkResponse(res))
 	};
 
@@ -74,20 +92,28 @@ class Api {
 
 	// добавление карточки на сервер
 	setCard({ name, link }) {
+		const token = localStorage.getItem('token')
 		return fetch(`${this._address}/cards`, {
 			method: 'POST',
-			headers: this._headers,
+			headers: {
+				authorization: `Bearer ${token}`,
+				"Content-Type": "application/json",
+			},
 			body: JSON.stringify({ name, link })
 		}).then((res) => this._checkResponse(res))
 	};
 
 	// удаление карточки
 	deleteCard(cardId) {
+		const token = localStorage.getItem('token')
 		return fetch(`${this._address}/cards/${cardId}`, {
 			method: 'DELETE',
-			headers: this._headers,
+			headers: {
+				authorization: `Bearer ${token}`,
+				"Content-Type": "application/json",
+			},
 		}).then((res) => this._checkResponse(res))
 	};
 };
 
-export const api = new Api({ token, address }) 
+export const api = new Api({ address }) 

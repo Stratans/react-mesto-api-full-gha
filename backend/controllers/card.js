@@ -13,7 +13,7 @@ const {
 module.exports.getCards = (req, res, next) => {
   card.find({})
     .populate(['owner', 'likes'])
-    .then((cardData) => res.status(STATUS_ОК).send({ data: cardData }))
+    .then((cardData) => res.status(STATUS_ОК).send(cardData))
     .catch(next);
 };
 
@@ -23,7 +23,8 @@ module.exports.createCard = ((req, res, next) => {
   const owner = req.user._id;
   card.create({ name, link, owner })
     .then((cardData) => {
-      res.status(CREATED).send({ data: cardData });
+      cardData.populate('owner')
+        .then(() => { res.status(CREATED).send(cardData); });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -64,11 +65,12 @@ module.exports.likeCard = ((req, res, next) => {
   const cardId = req.params._id;
   const userId = req.user._id;
   card.findByIdAndUpdate(cardId, { $addToSet: { likes: userId } }, { new: true })
+    .populate(['owner', 'likes'])
     .then((cardData) => {
       if (!cardData) {
         throw new NotFoundError('Приехали! Карточка не найдена!');
       }
-      res.send({ data: cardData });
+      res.send(cardData);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -82,12 +84,12 @@ module.exports.dislikeCard = ((req, res, next) => {
   const cardId = req.params._id;
   const userId = req.user._id;
   card.findByIdAndUpdate(cardId, { $pull: { likes: userId } }, { new: true })
-
+    .populate(['owner', 'likes'])
     .then((cardData) => {
       if (!cardData) {
         throw new NotFoundError('Приехали! Карточка не найдена!');
       }
-      res.send({ data: cardData });
+      res.send(cardData);
     })
     .catch((err) => {
       if (err.name === 'CastError') {

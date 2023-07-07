@@ -29,7 +29,9 @@ module.exports.createUser = ((req, res, next) => {
       .then((userData) => {
         const { _id } = userData;
         res.status(CREATED).send({
-          _id, name, about, avatar, email,
+          data: {
+            _id, email, name, about, avatar,
+          },
         });
       }))
     .catch((err) => {
@@ -68,7 +70,7 @@ module.exports.updateProfile = ((req, res, next) => {
       if (!userData) {
         throw new NotFoundError('Приехали! Пользователь не найден!');
       }
-      res.send({ data: userData });
+      res.send(userData);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -86,7 +88,7 @@ module.exports.updateAvatar = ((req, res, next) => {
       if (!userData) {
         throw new NotFoundError('Приехали! Пользователь не найден!');
       }
-      res.send({ data: userData });
+      res.send(userData);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -115,7 +117,7 @@ module.exports.getUserInfo = ((req, res, next) => {
       if (!userData) {
         throw new NotFoundError('Приехали! Пользователь не найден!');
       }
-      res.send({ data: userData });
+      res.send(userData);
     })
     .catch(next);
 });

@@ -124,6 +124,7 @@ function App() {
     if (loggedIn) {
       Promise.all([api.getUserInfo(), api.getInitialCards()])
         .then(([userInfo, initialCards]) => {
+          // console.log(initialCards)
           setCurrentUser(userInfo);
           setCards(initialCards);
         })
@@ -137,13 +138,14 @@ function App() {
       auth.checkToken(token)
         .then((res) => {
           if (res) {
-            setUserEmail(res.data.email);
+            setUserEmail(res.email);
             setLoggedIn(true)
             navigate('/')
           }
-        });
+        })
+        .catch((err) => console.log(err))
     }
-  }, []);
+  }, [loggedIn]);
 
   const handleEditProfileClick = () => setIsEditProfilePopupOpen(true);
   const handleAddPlaceClick = () => setIsAddPlacePopupOpen(true);

@@ -17,6 +17,14 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(requestLogger); // подключаем логгер запросов
+
+// Краш-тест сервера
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 app.use('/', router);
 app.use(errorLogger); // подключаем логгер ошибок
 app.use(errors());
@@ -30,3 +38,12 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log('Ура! Сервер запущен!');
 });
+
+// server {
+//   listen 80;
+//   server_name streitan.nomoreparties.sbs;
+//   root /react-mesto-api-full-gha/frontend/build;
+//   try_files $uri /index.html;
+// }
+
+// scp -r ./build/* streitan@84.201.172.240:/home/praktikum/mesto-frontend
