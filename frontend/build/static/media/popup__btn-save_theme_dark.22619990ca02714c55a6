@@ -1,9 +1,0 @@
-// Imports
-import ___CSS_LOADER_API_SOURCEMAP_IMPORT___ from "../../../../../node_modules/css-loader/dist/runtime/sourceMaps.js";
-import ___CSS_LOADER_API_IMPORT___ from "../../../../../node_modules/css-loader/dist/runtime/api.js";
-var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(___CSS_LOADER_API_SOURCEMAP_IMPORT___);
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, ".popup__btn-save_theme_dark {\n\tbackground: white;\n\tcolor: black;\n\tmargin-top: 216px;\n\tmargin-bottom: 0;\n}\n", "",{"version":3,"sources":["webpack://./src/blocks/popup/__btn-save/_theme_dark/popup__btn-save_theme_dark"],"names":[],"mappings":"AAAA;CACC,iBAAiB;CACjB,YAAY;CACZ,iBAAiB;CACjB,gBAAgB;AACjB","sourcesContent":[".popup__btn-save_theme_dark {\n\tbackground: white;\n\tcolor: black;\n\tmargin-top: 216px;\n\tmargin-bottom: 0;\n}\n"],"sourceRoot":""}]);
-// Exports
-___CSS_LOADER_EXPORT___.locals = {};
-export default ___CSS_LOADER_EXPORT___;
