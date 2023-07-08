@@ -15,18 +15,16 @@ mongoose
   .catch(() => console.log('Ошибка соединения с базой данных'));
 
 app.use(cors());
-app.options('*', cors());
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(requestLogger); // подключаем  логгер запросов
 
 // Краш-тест сервераа
-// app.get('/crash-test', () => {
-//   setTimeout(() => {
-//     throw new Error('Сервер сейчас упадёт');
-//   }, 0);
-// });
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.use('/', router);
 app.use(errorLogger); // подключаем логгер ошибок
