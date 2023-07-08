@@ -20,15 +20,15 @@ module.exports.getCards = (req, res, next) => {
 module.exports.createCard = ((req, res, next) => {
   const { name, link } = req.body;
   const owner = req.user._id;
-  card.create({ name, link, owner })
-    .then((cardData) => {
-      cardData.populate('owner')
-        .then(() => { res.status(CREATED).send(cardData); });
-    })
+  return card.create({ name, link, owner })
+    .then((cardData) => cardData.populate('owner')
+      .then(() => { res.status(CREATED).send(cardData); }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new ValidationError('Приехали! Некорректные данные!'));
-      } else next(err);
+      } else {
+        next(err);
+      }
     });
 });
 
