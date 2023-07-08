@@ -5,6 +5,7 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
+  res.header('Access-Control-Allow-Origin', '*');
   if (!authorization || !authorization.startsWith('Bearer ')) {
     return next(new UnAuthorizedError('Приехали! Необходима авторизация!'));
   }
