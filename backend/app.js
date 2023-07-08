@@ -14,7 +14,9 @@ mongoose
   .then(() => console.log('Соединение с базой данных установлено'))
   .catch(() => console.log('Ошибка соединения с базой данных'));
 
-app.use(cors());
+// app.use(cors());
+app.options('*', cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(requestLogger); // подключаем  логгер запросов
