@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const user = require('../models/user');
 const NotFoundError = require('../errors/notFound');
-const CastError = require('../errors/castError');
+// const CastError = require('../errors/castError');
 const ValidationError = require('../errors/validationError');
 const ConflictError = require('../errors/conflictError');
 
@@ -58,7 +58,7 @@ module.exports.getUserById = ((req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        next(new CastError('Приехали! Некорректное айди!'));
+        next(new ValidationError('Приехали! Некорректное айди!'));
       } else next(err);
     });
 });

@@ -1,6 +1,6 @@
 const card = require('../models/card');
 const NotFoundError = require('../errors/notFound');
-const CastError = require('../errors/castError');
+// const CastError = require('../errors/castError');
 const ValidationError = require('../errors/validationError');
 const ForbiddenError = require('../errors/forbiddenError');
 
@@ -55,7 +55,7 @@ module.exports.deleteCard = ((req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        next(new CastError('Приехали! Некорректное айди!'));
+        next(new ValidationError('Приехали! Некорректное айди!'));
       } else next(err);
     });
 });
@@ -74,7 +74,7 @@ module.exports.likeCard = ((req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        next(new CastError('Приехали! Некорректное айди!'));
+        next(new ValidationError('Приехали! Некорректное айди!'));
       } else next(err);
     });
 });
@@ -93,7 +93,7 @@ module.exports.dislikeCard = ((req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        next(new CastError('Приехали! Некорректное айди!'));
+        next(new ValidationError('Приехали! Некорректное айди!'));
       } else next(err);
     });
 });
